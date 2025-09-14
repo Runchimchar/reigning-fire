@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dysk8gcn6n5k1"]
+
+[ext_resource type="Script" path="res://scenes/breakables/gold_house.gd" id="1_3yq4c"]
+[ext_resource type="Texture2D" uid="uid://v5u1aepba0t1" path="res://assets/sprites/gold_house.png" id="2_4tkcm"]
+[ext_resource type="Texture2D" uid="uid://b1r2fp4guogrf" path="res://assets/sprites/treasure.png" id="3_eqw82"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7m4t6"]
+size = Vector2(90, 83)
+
+[node name="GoldHouse" type="Area2D" groups=["breakable"]]
+texture_filter = 1
+script = ExtResource("1_3yq4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, -38.5)
+scale = Vector2(2.02632, 2.02632)
+texture = ExtResource("2_4tkcm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -41.5)
+shape = SubResource("RectangleShape2D_7m4t6")
+
+[node name="Coins" type="CPUParticles2D" parent="."]
+position = Vector2(0, -86.6667)
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("3_eqw82")
+direction = Vector2(0, -1)
+spread = 29.74
+gravity = Vector2(0, 600)
+initial_velocity_min = 383.43
+initial_velocity_max = 638.26
+angular_velocity_min = -350.68
+angular_velocity_max = 290.99

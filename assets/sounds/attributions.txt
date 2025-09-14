@@ -1,0 +1,4 @@
+coins.mp3 / big_coins.wav: https://pixabay.com/sound-effects/drop-coin-384921/
+explosion.mp3 / explosion_filtered.wav: https://pixabay.com/sound-effects/medium-explosion-40472/
+blow.wav: https://pixabay.com/sound-effects/052708-blowgun-39165/
+roar.wav: https://pixabay.com/sound-effects/dragon-roar-5-364611/

@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://b510kvjbknclb"]
+
+[ext_resource type="PackedScene" uid="uid://cxyvqotih77ld" path="res://scenes/dragon/dragon.tscn" id="1_02rba"]
+[ext_resource type="PackedScene" uid="uid://dldu35kldsoe2" path="res://scenes/ui/points_meter.tscn" id="1_36ct6"]
+[ext_resource type="Shader" path="res://assets/shaders/wave_shader.gdshader" id="1_117gd"]
+[ext_resource type="PackedScene" uid="uid://c6f4svi52gnkv" path="res://scenes/ui/breath_meter.tscn" id="1_d5v1e"]
+[ext_resource type="Script" path="res://scripts/bkg_fire_glow.gd" id="2_tbu8l"]
+[ext_resource type="PackedScene" uid="uid://dneebiqmtqrdq" path="res://scenes/ui/death_ui.tscn" id="3_ngcfj"]
+[ext_resource type="PackedScene" uid="uid://cwc6agmt0o1n8" path="res://scenes/breakables/house_manager.tscn" id="7_t2g7f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ks3on"]
+shader = ExtResource("1_117gd")
+shader_parameter/waveAmplitude = 0.037
+shader_parameter/correctVertex = true
+shader_parameter/waveFrequency = 31.311
+shader_parameter/verticalWave = true
+shader_parameter/keepTransparency = false
+shader_parameter/useTime = true
+shader_parameter/waveSpeed = 4.825
+shader_parameter/progress = 0.0
+shader_parameter/firstHalf = 0.5
+shader_parameter/secondHalf = 0.5
+shader_parameter/freezeFirstHalf = false
+shader_parameter/freezeSecondHalf = false
+
+[sub_resource type="Gradient" id="Gradient_0xhck"]
+offsets = PackedFloat32Array(0.545189)
+colors = PackedColorArray(0.373909, 0.61238, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_phs7m"]
+gradient = SubResource("Gradient_0xhck")
+
+[sub_resource type="Gradient" id="Gradient_vcr5q"]
+offsets = PackedFloat32Array(0.012987, 0.0844156, 0.149351, 0.331169, 0.483965)
+colors = PackedColorArray(0.662745, 0.129412, 0.0196078, 1, 0.831682, 0.410202, 0.111036, 1, 0.478431, 0.470588, 0.635294, 0.87451, 0.45098, 0.47451, 0.568627, 0.513726, 0.4029, 0.42432, 0.51, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bk3ge"]
+gradient = SubResource("Gradient_vcr5q")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="UICanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PointsMeter" parent="UICanvasLayer" instance=ExtResource("1_36ct6")]
+
+[node name="BreathMeter" parent="UICanvasLayer" instance=ExtResource("1_d5v1e")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -56.0
+offset_top = 9.0
+offset_right = -9.0
+offset_bottom = 212.0
+grow_horizontal = 0
+grow_vertical = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DeathUi" parent="UICanvasLayer" instance=ExtResource("3_ngcfj")]
+visible = false
+
+[node name="BkgCanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BkgBkg" type="TextureRect" parent="BkgCanvasLayer"]
+material = SubResource("ShaderMaterial_ks3on")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture1D_phs7m")
+
+[node name="BkgFire" type="TextureRect" parent="BkgCanvasLayer"]
+material = SubResource("ShaderMaterial_ks3on")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_bk3ge")
+script = ExtResource("2_tbu8l")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Dragon" parent="." instance=ExtResource("1_02rba")]
+position = Vector2(162, 149)
+scale = Vector2(2.7, 2.7)
+
+[node name="HouseManager" parent="." instance=ExtResource("7_t2g7f")]
+position = Vector2(1235, 651)
