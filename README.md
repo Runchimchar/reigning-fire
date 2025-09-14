@@ -1,2 +1,2 @@
 # reigning-fire
-Godot game about dragons
+A Godot-based game about a dragon burning down houses.
