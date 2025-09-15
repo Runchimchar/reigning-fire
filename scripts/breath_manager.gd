@@ -42,5 +42,5 @@ func _handle_restart():
 func _handle_new_scene(node: Node):
 	# Set up with new scene
 	get_tree().node_added.disconnect(_handle_new_scene)
-	get_tree().current_scene.tree_exited.connect(_handle_restart)
+	get_tree().current_scene.tree_exiting.connect(_handle_restart)
 	print("Breath manager restarted")

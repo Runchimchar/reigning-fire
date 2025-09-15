@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://cfcnswpxuoh28"]
+
+[ext_resource type="Texture2D" uid="uid://bbtpqd1bngtno" path="res://assets/sprites/dragon_moving.png" id="1_666h4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quuir"]
+atlas = ExtResource("1_666h4")
+region = Rect2(0, 0, 66, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8eam"]
+atlas = ExtResource("1_666h4")
+region = Rect2(66, 0, 66, 39)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_quuir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8eam")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]

@@ -4,7 +4,7 @@ const BASIC_HOUSE = preload("res://scenes/breakables/basic_house.tscn")
 const GOLD_HOUSE = preload("res://scenes/breakables/gold_house.tscn")
 
 const SPEAR_CHANCE_INCR: float = 0.0001
-const BASE_SPEAR_CHANCE: float = 0.005
+const BASE_SPEAR_CHANCE: float = 0.0
 const MAX_SPEAR_CHANCE: float = 0.02
 
 const HOUSE_EDGE_PADDING: int = 100
@@ -54,7 +54,8 @@ func ready_house():
 		house.spear_chance = spear_chance
 		spear_chance = min(spear_chance + SPEAR_CHANCE_INCR, MAX_SPEAR_CHANCE)
 	
-	add_child(house)
+	house.broken = true
+	$HouseSpawn.add_child(house)
 	next_house = house
 
 # Lazy load these vars.
@@ -65,23 +66,36 @@ func try_add_house():
 	if next_house == null:
 		ready_house()
 	
-	# Lazy load these children.
-	if prev_coll_shape == null: prev_coll_shape = houses[-1].find_child("CollisionShape2D")
-	if next_coll_shape == null: next_coll_shape = next_house.find_child("CollisionShape2D")
+	var is_ready = false
 	
-	# Check if we can add the next house.
-	var prev_right = prev_coll_shape.shape.get_rect().end.x \
-		* prev_coll_shape.global_scale.x \
-		+ prev_coll_shape.global_position.x
-	var next_left = next_coll_shape.shape.get_rect().position.x \
-		* next_coll_shape.global_scale.x \
-		+ next_coll_shape.global_position.x
+	if not houses.is_empty():
+		# Lazy load these children.
+		if prev_coll_shape == null: prev_coll_shape = houses[-1].find_child("CollisionShape2D")
+		if next_coll_shape == null: next_coll_shape = next_house.find_child("CollisionShape2D")
+		
+		# Check if we can add the next house.
+		var prev_right = prev_coll_shape.shape.get_rect().end.x \
+			* prev_coll_shape.global_scale.x \
+			+ prev_coll_shape.global_position.x
+		var next_left = next_coll_shape.shape.get_rect().position.x \
+			* next_coll_shape.global_scale.x \
+			+ next_coll_shape.global_position.x
+		
+		is_ready = next_left - prev_right >= next_spread
+	else:
+		# Handle the case that the next house is the only house.
+		is_ready = true
 	
-	if next_left - prev_right >= next_spread:
+	if is_ready:
 		# Add the house.
 		houses.append(next_house)
+		next_house.broken = false
+		
 		# Reset variables.
 		next_spread = randi_range(MIN_SPREAD, MAX_SPREAD)
 		next_house = null
 		prev_coll_shape = null
 		next_coll_shape = null
+		
+		# Ready next.
+		ready_house()

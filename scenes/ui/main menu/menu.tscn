@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://m0lejxkta8ws"]
+
+[ext_resource type="Script" path="res://scenes/ui/main menu/menu.gd" id="1_8d80a"]
+[ext_resource type="SystemFont" uid="uid://cfutx4nn4bt4g" path="res://assets/fonts/treasure_font.tres" id="2_lx3oy"]
+[ext_resource type="AudioStream" uid="uid://damcqxwlo5wj7" path="res://assets/sounds/theme.mp3" id="3_f5lvv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqwxp"]
+bg_color = Color(0.0901961, 0.0313726, 0.00784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m0a4y"]
+font = ExtResource("2_lx3oy")
+font_size = 70
+font_color = Color(1, 0.627451, 0.0823529, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8d80a")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eqwxp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "🔥REIGNING FIRE🔥"
+label_settings = SubResource("LabelSettings_m0a4y")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BeginButton" type="Button" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
+text = "BEGIN!!"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+text = "quit"
+
+[node name="ThemePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_f5lvv")
+volume_db = -3.552
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/BeginButton" to="." method="_on_begin"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/QuitButton" to="." method="_on_quit"]
