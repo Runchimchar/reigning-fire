@@ -1,7 +1,9 @@
+@tool
 extends TextureRect
 
 var gradient: Gradient
-var original_gradient: Gradient
+
+@export var original_gradient: Gradient
 var time: float = 0
 
 var alt_color_0: Color = Color.from_string("#fd6200", Color.MAGENTA)

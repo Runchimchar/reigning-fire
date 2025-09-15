@@ -16,6 +16,7 @@ const HURT_PERCENT = 0.34
 var bounds: Vector2
 var collision_bounds: Vector2
 var alive: bool = true
+var godmode = false
 
 func _ready():
 	dragon = self
@@ -41,12 +42,17 @@ func _physics_process(delta):
 			velocity.y = y_direction * speed
 		else:
 			velocity.y = move_toward(velocity.y, 0, speed)
+		
+		$AnimatedSprite2D.speed_scale = speed / BASE_SPEED
 	else:
 		# Dead movement
 		var dead_speed = 100
 		const VARIANCE: float = 8.0
 		velocity = Vector2.from_angle((3.5/4.0)*PI + randf_range(-PI/VARIANCE, PI/VARIANCE)) \
 			* dead_speed
+		
+		$AnimatedSprite2D.speed_scale = 0
+		$AnimatedSprite2D.frame = 0
 
 	move_and_slide()
 	
@@ -57,6 +63,8 @@ func _physics_process(delta):
 	# Increase breath meter (watch out for FPS!), if not sprinting.
 	if not is_sprinting():
 		BreathManager.breath += BREATH_RECHARGE * delta
+	if godmode:
+		BreathManager.breath = 1.0
 
 # Handle mouse / debug events.
 func _unhandled_input(event):
@@ -68,6 +76,9 @@ func _unhandled_input(event):
 			BreathManager.max_breath += 0.34
 		if event.keycode == KEY_KP_SUBTRACT:
 			_try_hurt(1)
+		if event.keycode == KEY_KP_ENTER:
+			godmode = not godmode
+			print("Godmode is now "+("on" if godmode else "off"))
 
 func try_create_fireball(target: Vector2):
 	if BreathManager.breath < FIREBALL_COST or not alive:
@@ -94,15 +105,17 @@ func clamp_to_bounds():
 
 # Required by 'hurtable' group.
 func _try_hurt(hurt: int) -> bool:
-	if hurt <= 0 or not alive:
+	if hurt <= 0 or not alive or godmode:
 		return false
 	BreathManager.max_breath -= hurt * HURT_PERCENT
 	
 	if BreathManager.max_breath == 0.0:
 		SfxHelper.Play(ROAR_SOUND, self, 0.5)
+		ScreenShaker.shake_screen(40.0, 90.0, 1.0)
 		handle_death()
 	else:
 		SfxHelper.Play(ROAR_SOUND, self, randf_range(0.9, 1.1))
+		ScreenShaker.shake_screen()
 	
 	return true
 

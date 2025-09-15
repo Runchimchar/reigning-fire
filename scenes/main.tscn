@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b510kvjbknclb"]
+[gd_scene load_steps=14 format=3 uid="uid://b510kvjbknclb"]
 
 [ext_resource type="PackedScene" uid="uid://cxyvqotih77ld" path="res://scenes/dragon/dragon.tscn" id="1_02rba"]
 [ext_resource type="PackedScene" uid="uid://dldu35kldsoe2" path="res://scenes/ui/points_meter.tscn" id="1_36ct6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c6f4svi52gnkv" path="res://scenes/ui/breath_meter.tscn" id="1_d5v1e"]
 [ext_resource type="Script" path="res://scripts/bkg_fire_glow.gd" id="2_tbu8l"]
 [ext_resource type="PackedScene" uid="uid://dneebiqmtqrdq" path="res://scenes/ui/death_ui.tscn" id="3_ngcfj"]
+[ext_resource type="Gradient" uid="uid://bfwesp8g7jlrl" path="res://assets/gradients/fire_gradient.tres" id="5_ffdci"]
 [ext_resource type="PackedScene" uid="uid://cwc6agmt0o1n8" path="res://scenes/breakables/house_manager.tscn" id="7_t2g7f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ks3on"]
@@ -25,19 +26,21 @@ shader_parameter/freezeSecondHalf = false
 
 [sub_resource type="Gradient" id="Gradient_0xhck"]
 offsets = PackedFloat32Array(0.545189)
-colors = PackedColorArray(0.373909, 0.61238, 1, 1)
+colors = PackedColorArray(0.372549, 0.611765, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_phs7m"]
 gradient = SubResource("Gradient_0xhck")
 
-[sub_resource type="Gradient" id="Gradient_vcr5q"]
-offsets = PackedFloat32Array(0.012987, 0.0844156, 0.149351, 0.331169, 0.483965)
-colors = PackedColorArray(0.662745, 0.129412, 0.0196078, 1, 0.831682, 0.410202, 0.111036, 1, 0.478431, 0.470588, 0.635294, 0.87451, 0.45098, 0.47451, 0.568627, 0.513726, 0.4029, 0.42432, 0.51, 0)
-
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bk3ge"]
-gradient = SubResource("Gradient_vcr5q")
-fill_from = Vector2(0, 1)
+resource_local_to_scene = true
+gradient = ExtResource("5_ffdci")
+fill_from = Vector2(0, 0.867521)
 fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_ah6o6"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0.012987, 0.0844156, 0.149351, 0.331169, 0.483965)
+colors = PackedColorArray(0.83181, 0.293664, 0, 1, 0.940949, 0.633809, 0.0877278, 1, 0.478431, 0.470588, 0.635294, 0.87451, 0.45098, 0.47451, 0.568627, 0.513726, 0.4029, 0.42432, 0.51, 0)
 
 [node name="Node2D" type="Node2D"]
 
@@ -87,6 +90,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_bk3ge")
 script = ExtResource("2_tbu8l")
+original_gradient = SubResource("Gradient_ah6o6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -96,4 +100,4 @@ position = Vector2(162, 149)
 scale = Vector2(2.7, 2.7)
 
 [node name="HouseManager" parent="." instance=ExtResource("7_t2g7f")]
-position = Vector2(1235, 651)
+position = Vector2(1235, 610)

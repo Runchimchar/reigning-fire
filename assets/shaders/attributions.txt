@@ -1,0 +1,2 @@
+wave_shader.gdshader: https://godotshaders.com/shader/wavy-texture/
+flipbook.gdshader: https://godotshaders.com/snippet/flipbook/
