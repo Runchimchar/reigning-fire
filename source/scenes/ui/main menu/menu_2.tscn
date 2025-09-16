@@ -653,6 +653,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wyrg1")
 
 [node name="Reigning" type="Label" parent="Part1"]
+layout_mode = 0
 offset_left = -124.0
 offset_top = 95.0
 offset_right = 456.0
@@ -662,6 +663,7 @@ label_settings = SubResource("LabelSettings_ot3q5")
 horizontal_alignment = 1
 
 [node name="Fire" type="Label" parent="Part1"]
+layout_mode = 0
 offset_left = 739.0
 offset_top = 186.0
 offset_right = 1319.0
