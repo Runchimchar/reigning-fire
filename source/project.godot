@@ -25,6 +25,7 @@ ScreenShaker="*res://scripts/screen_shaker.gd"
 
 window/size/resizable=false
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [input]
 
