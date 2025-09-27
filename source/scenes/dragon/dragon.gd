@@ -66,17 +66,19 @@ func _physics_process(delta):
 	if godmode:
 		BreathManager.breath = 1.0
 
-# Handle mouse / debug events.
+# Event handling.
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
+		# Catch clicks for fireballs.
 		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT and event.pressed:
-			try_create_fireball(event.global_position)
-	elif event is InputEventKey and event.is_pressed():
-		if event.keycode == KEY_KP_ADD:
+			try_create_fireball(event.position)
+	elif event is InputEventKey and event.is_pressed() and OS.is_debug_build():
+		# Catch debug testing tools.
+		if event.physical_keycode == KEY_KP_ADD:
 			BreathManager.max_breath += 0.34
-		if event.keycode == KEY_KP_SUBTRACT:
+		if event.physical_keycode == KEY_KP_SUBTRACT:
 			_try_hurt(1)
-		if event.keycode == KEY_KP_ENTER:
+		if event.physical_keycode == KEY_KP_ENTER:
 			godmode = not godmode
 			print("Godmode is now "+("on" if godmode else "off"))
 

@@ -24,6 +24,7 @@ ScreenShaker="*res://scripts/screen_shaker.gd"
 [display]
 
 window/size/resizable=false
+window/stretch/mode="canvas_items"
 
 [input]
 
