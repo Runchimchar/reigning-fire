@@ -37,4 +37,10 @@ func _restart():
 	get_tree().reload_current_scene()
 
 func _quit():
-	get_tree().quit()
+	if is_web():
+		JavaScriptBridge.eval("window.close();")
+	else:
+		get_tree().quit()
+
+func is_web() -> bool:
+	return OS.has_feature("web")

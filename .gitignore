@@ -2,3 +2,5 @@
 .godot/
 # Don't save any of the real builds, but keep the existing build/web/index.html
 build
+# Don't include any temp files.
+*.tmp
