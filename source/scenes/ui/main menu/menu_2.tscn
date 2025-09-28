@@ -1,10 +1,10 @@
 [gd_scene load_steps=22 format=3 uid="uid://oa63y5s47uoc"]
 
-[ext_resource type="Script" path="res://scenes/ui/main menu/menu_2.gd" id="1_tokyp"]
+[ext_resource type="Script" uid="uid://dfkqsix4m25h5" path="res://scenes/ui/main menu/menu_2.gd" id="1_tokyp"]
 [ext_resource type="SystemFont" uid="uid://cfutx4nn4bt4g" path="res://assets/fonts/treasure_font.tres" id="2_1ysgi"]
 [ext_resource type="Texture2D" uid="uid://brera858f6xmw" path="res://assets/sprites/temp_dragon.png" id="3_5o7r1"]
 [ext_resource type="Texture2D" uid="uid://c7tu3jsnqek45" path="res://assets/sprites/fire_text_sprite_sheet.png" id="3_ctgm5"]
-[ext_resource type="Shader" path="res://assets/shaders/flipbook.gdshader" id="3_ov153"]
+[ext_resource type="Shader" uid="uid://dgtqk0bhx13or" path="res://assets/shaders/flipbook.gdshader" id="3_ov153"]
 [ext_resource type="AudioStream" uid="uid://damcqxwlo5wj7" path="res://assets/sounds/theme.mp3" id="6_igmxh"]
 [ext_resource type="AudioStream" uid="uid://dlyr51wnd2ud6" path="res://assets/sounds/explosion_filtered.wav" id="6_pjqt3"]
 [ext_resource type="AudioStream" uid="uid://cfw5fq2cbc04s" path="res://assets/sounds/roar.wav" id="7_31j0s"]
@@ -20,6 +20,7 @@ font_size = 80
 font_color = Color(1, 0.627451, 0.0823529, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sy57r"]
+resource_local_to_scene = true
 shader = ExtResource("3_ov153")
 shader_parameter/cell_range = Vector2(5, 1)
 shader_parameter/speed = 2.492
@@ -539,11 +540,23 @@ tracks/20/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Part2:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wxdqh"]
 _data = {
-"IntroAnimation": SubResource("Animation_wjobh"),
-"RESET": SubResource("Animation_lj4pr")
+&"IntroAnimation": SubResource("Animation_wjobh"),
+&"RESET": SubResource("Animation_lj4pr")
 }
 
 [node name="Menu2" type="Control"]
@@ -574,7 +587,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_sdmxs")
 
 [node name="Part 2" type="VBoxContainer" parent="Part2"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 286.0
 offset_top = 159.0
 offset_right = 866.0
@@ -612,7 +625,7 @@ theme_override_font_sizes/font_size = 20
 text = "quit"
 
 [node name="Reigning" type="Label" parent="Part2"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 293.0
 offset_top = 95.0
 offset_right = 873.0
@@ -667,7 +680,7 @@ layout_mode = 0
 offset_left = 739.0
 offset_top = 186.0
 offset_right = 1319.0
-offset_bottom = 334.0
+offset_bottom = 485.0
 text = "FIRE
 "
 label_settings = SubResource("LabelSettings_qagoi")
@@ -702,7 +715,7 @@ volume_db = -3.552
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_wxdqh")
+&"": SubResource("AnimationLibrary_wxdqh")
 }
 
 [connection signal="pressed" from="Part2/Part 2/MarginContainer/BeginButton" to="." method="_on_begin"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxyvqotih77ld"]
 
-[ext_resource type="Script" path="res://scenes/dragon/dragon.gd" id="1_y5by3"]
+[ext_resource type="Script" uid="uid://b55vkv2umn50g" path="res://scenes/dragon/dragon.gd" id="1_y5by3"]
 [ext_resource type="SpriteFrames" uid="uid://cfcnswpxuoh28" path="res://assets/sprites/dragon_sprite_frames.tres" id="3_uryri"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n8ggh"]

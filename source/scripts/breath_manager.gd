@@ -34,7 +34,7 @@ var max_breath: float = 1.0:
 		max_breath_updated.emit(value)
 
 func _handle_restart():
-	print("Breath manager restarting...")
+	#print("Breath manager restarting...")
 	breath = INITIAL_BREATH
 	max_breath = INITIAL_MAX_BREATH
 	get_tree().node_added.connect(_handle_new_scene)
@@ -43,4 +43,4 @@ func _handle_new_scene(node: Node):
 	# Set up with new scene
 	get_tree().node_added.disconnect(_handle_new_scene)
 	get_tree().current_scene.tree_exiting.connect(_handle_restart)
-	print("Breath manager restarted")
+	#print("Breath manager restarted")

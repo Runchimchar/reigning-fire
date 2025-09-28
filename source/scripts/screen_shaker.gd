@@ -69,7 +69,7 @@ func update_camera():
 	camera = get_viewport().get_camera_2d()
 
 func _handle_restart():
-	print("Screen shaker restarting...")
+	#print("Screen shaker restarting...")
 	strength = 0.0
 	get_tree().node_added.connect(_handle_new_scene)
 
@@ -78,4 +78,4 @@ func _handle_new_scene(node: Node):
 	get_tree().node_added.disconnect(_handle_new_scene)
 	get_tree().current_scene.tree_exiting.connect(_handle_restart)
 	update_camera()
-	print("Screen shaker restarted")
+	#print("Screen shaker restarted")

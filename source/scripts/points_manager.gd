@@ -20,7 +20,7 @@ var points: int = 0:
 		points_updated.emit(value)
 
 func _handle_restart():
-	print("Points manager restarting...")
+	#print("Points manager restarting...")
 	start_time = Time.get_ticks_msec()
 	points = INITIAL_POINTS
 	get_tree().node_added.connect(_handle_new_scene)
@@ -29,4 +29,4 @@ func _handle_new_scene(node: Node):
 	# Set up with new scene
 	get_tree().node_added.disconnect(_handle_new_scene)
 	get_tree().current_scene.tree_exiting.connect(_handle_restart)
-	print("Points manager restarted")
+	#print("Points manager restarted")
